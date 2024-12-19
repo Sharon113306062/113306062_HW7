@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Profile Page</title>
+	 <link rel="stylesheet" href="113306062_HW7.css">
+</head>
+<body>
+	<div class="main-container">
+		 <div class="left-panel">
+		 	<div class="photo-panel"></div>
+      <div class="name-section">
+        <h1 id="name-display">Sharon Yang</h1> 
+        <button id="edit-button" onclick="toggleEdit()">Edit</button> 
+      </div>
+		 	<div class="text-content">
+		 		<section class="about-me">
+          <h3>About Me</h3>
+          <p>Hello, I'm Sharon Yang, a passionate web developer from NCCU. I enjoy coding, learning new technologies, and solving challenging problems. I'm currently pursuing my degree in Computer Science at NCCU University.</p>
+        </section>
+         <section class="contact-info">
+          <h3>Contact Info</h3>
+          <p>Email: 113306062@g.nccu.edu.tw</p>
+          <p>Phone: 0905449577</p>
+        </section>
+        <div class="nccu-icon">
+          <img src="school.png" alt="NCCU Icon">
+        </div>
+      </div>
+    </div>
+    <div class="right-panel">
+  	<section class="education">
+    <h2>Education</h2>
+    <div class="timeline">
+      <div class="timeline-entry">
+        <div class="year">
+          <div>2024-</div>
+          <div>now</div>
+        </div>
+        <div class="description">National Chengchi University, Department of MIS Computer Science</div>
+      </div>
+      <div class="timeline-entry">
+        <div class="year">
+          <div>2021-</div>
+          <div>2023</div>
+        </div>
+        <div class="description">
+        <p>Taipei Yanping High School<br>
+        Participated in computer science club</p>
+    </div>
+      </div>
+      <div class="timeline-entry">
+        <div class="year">
+          <div>2018-</div>
+          <div>2021</div>
+        </div>
+        <div class="description">
+        <p>Middle School Graduation<br>
+        Started developing an interest in computer science</p>
+        </div>
+      </div>
+    </div>
+  	</section>
+      <section class="homework">
+        <h2>Homework List</h2>
+        <ul>
+        <li>HW1- <a href="https://github.com/Sharon113306062/HW1.git" target="_blank" class="homework-link">https://github.com/Sharon113306062/HW1.git</a></li>
+    	<li>HW2- <a href="https://github.com/Sharon113306062/HW2.git" target="_blank" class="homework-link">https://github.com/Sharon113306062/HW2.git</a></li>
+    	<li>HW3- <a href="https://github.com/Sharon113306062/HW3.git" target="_blank" class="homework-link">https://github.com/Sharon113306062/HW3.git</a></li>
+        </ul>
+      </section>
+      <section class="favorite-music">
+        <h2>Favorite Music</h2>
+        <div class="music-images">
+          <a href="https://www.youtube.com/watch?v=CKZvWhCqx1s" target="_blank">
+            <img src="youtube.png" alt="Song 1">
+            <p> On the ground</p>
+          </a>
+          <a href="https://www.youtube.com/watch?v=K9_VFxzCuQ0" target="_blank">
+            <img src="youtube.png" alt="Song 2">
+            <p> Gone</p>
+          </a>
+          <a href="https://www.youtube.com/watch?v=0-q1KafFCLU" target="_blank">
+            <img src="youtube.png" alt="Song 3">
+            <p>Celebrity</p>
+          </a>
+          <a href="https://www.youtube.com/watch?v=TgOu00Mf3kI" target="_blank">
+            <img src="youtube.png" alt="Song 4">
+            <p>eight</p>
+          </a>
+        </div>
+        <button id="add-music-button" onclick="showForm()">add</button>
+        <div id="music-form" style="display:none;">
+          <input type="text" id="music-link" placeholder="Enter music link">
+          <input type="text" id="music-name" placeholder="Enter music name">
+          <button onclick="addMusic()">Submit</button>
+          <p id="warning" style="display:none;color:red;">Please fill out both fields!</p>
+        </div>
+      </section>
+      <section class="note">
+        <p>These four songs are some of my all-time favorites. Each one represents a different genre and mood that I find inspiring. Enjoy listening!</p>
+      </section>
+    </div>
+  </div>
+  <script>
+    
+    function toggleEdit() {
+      var nameDisplay = document.getElementById('name-display');
+      var editButton = document.getElementById('edit-button');
+      
+      if (editButton.innerHTML === 'Edit') {
+        
+        var currentName = nameDisplay.innerHTML;
+        nameDisplay.innerHTML = '<input type="text" id="name-input" value="' + currentName + '">';
+        editButton.innerHTML = 'Save';
+      } else {
+        
+        var newName = document.getElementById('name-input').value;
+        nameDisplay.innerHTML = newName;
+        editButton.innerHTML = 'Edit';
+      }
+    }
+    // Show form to add music
+        function showForm() {
+            document.getElementById('music-form').style.display = 'block';
+        }
+
+        // Add music item to the page
+        function addMusic() {
+            var musicLink = document.getElementById('music-link').value;
+            var musicName = document.getElementById('music-name').value;
+            var warningMessage = document.getElementById('warning');
+
+            // Check if both fields are filled
+            if (musicLink && musicName) {
+                // Create a new music item
+                var musicContainer = document.querySelector('.favorite-music .music-images');
+                var newMusicItem = document.createElement('a');
+                newMusicItem.href = musicLink;
+                newMusicItem.target = '_blank';
+
+                // Add image (you can modify this to use specific image URLs based on the music)
+                var newImage = document.createElement('img');
+                newImage.src = 'youtube.png';
+                newImage.alt = musicName;
+
+                // Add description (music name)
+                var newDescription = document.createElement('p');
+                newDescription.textContent = musicName;
+
+                // Append the new music item
+                newMusicItem.appendChild(newImage);
+                newMusicItem.appendChild(newDescription);
+                musicContainer.appendChild(newMusicItem);
+
+                // Hide the form and clear input
+                document.getElementById('music-form').style.display = 'none';
+                document.getElementById('music-link').value = '';
+                document.getElementById('music-name').value = '';
+            } else {
+                // Show warning if fields are not filled
+                warningMessage.style.display = 'block';
+            }
+        }
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
